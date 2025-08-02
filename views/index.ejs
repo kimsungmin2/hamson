@@ -1,319 +1,329 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>함손 건설기계</title>
-    <link rel="stylesheet" href="styles/main.css" />
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
       body {
-        font-family: 'Noto Sans KR', sans-serif;
         margin: 0;
         padding: 0;
-        padding-top: 80px; /* 헤더 높이만큼 여백 확보 (필요시 조정) */
+        height: 100%;
+        overflow: hidden;
+        font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
       }
-      .header {
-        position: fixed; /* 화면 상단 고정 */
+
+      header {
+        position: fixed;
         top: 0;
-        left: 0;
         width: 100%;
-        z-index: 1000; /* 다른 요소 위에 표시 */
-        background-color: #ffffff;
-        border-bottom: 1px solid #ddd;
-        color: #000;
+        height: 70px;
+        padding: 0 60px;
+        z-index: 1000;
         display: flex;
         align-items: center;
-        padding: 1rem 2rem;
-        font-family: 'Noto Sans KR', sans-serif;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        justify-content: flex-start;
+        background-color: white;
+        color: #003a70;
+        transition:
+          background-color 0.4s,
+          color 0.4s,
+          box-shadow 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       }
+
+      header.dark {
+        background-color: white;
+        color: black;
+      }
+
+      header.light {
+        background-color: #007acc;
+        color: white;
+      }
+
       .logo {
-        font-size: 1.75rem;
-        font-weight: 700;
-        color: #222;
-        flex-shrink: 0;
+        font-size: 1.8rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        margin-right: auto;
+        color: inherit;
       }
 
-      .nav {
+      nav.center-nav {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-      }
-
-      .nav ul {
-        list-style: none;
         display: flex;
-        gap: 2rem;
-        margin: 0;
-        padding: 0;
-      }
-
-      .nav a {
-        font-size: 1rem;
-        color: #333;
-        text-decoration: none;
-        padding: 0.5rem;
-        position: relative;
-        transition: color 0.2s ease-in-out;
-      }
-
-      .nav a::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 2px;
-        background-color: #005bac;
-        transition: 0.3s ease;
-        transform: translateX(-50%);
-      }
-
-      .nav a:hover {
-        color: #005bac;
-      }
-
-      .nav a:hover::after {
-        width: 100%;
-      }
-      .main-visual {
-        position: relative;
-        height: 500px;
-        background: #ddd;
-      }
-      .main-visual img {
-        width: 100%;
+        gap: 48px;
+        align-items: center;
         height: 100%;
-        object-fit: cover;
       }
-      .text-overlay {
-        position: absolute;
-        bottom: 40px;
-        left: 50px;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding: 1rem;
-        border-radius: 10px;
-      }
-      section {
-        padding: 2rem;
-      }
-      .product-list {
+
+      .menu-item {
+        position: relative;
+        height: 100%;
         display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
+        align-items: center;
       }
-      .product-item {
-        width: 200px;
-        text-align: center;
-      }
-      .product-item img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border: 1px solid #ddd;
+
+      .menu-link {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 16px 24px;
         border-radius: 8px;
-      }
-      .news ul {
-        list-style: none;
-        padding-left: 0;
-      }
-      .news li {
-        margin-bottom: 0.5rem;
-      }
-      .footer {
-        background: #333;
-        color: #fff;
-        text-align: center;
-        padding: 1rem;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
       }
 
-      .company-content {
-        text-align: center;
-        margin-top: 4rem;
+      .menu-link:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #f9c235;
       }
 
-      .image-wrapper {
+      .mega-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        width: 72vw;
+        max-width: 1100px;
+        padding: 40px 60px;
+        background: white;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 0.4s ease,
+          transform 0.3s ease,
+          visibility 0.3s;
+      }
+
+      .menu-item:hover .mega-menu,
+      .menu-item:focus-within .mega-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .menu-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .menu-column h4 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #003a70;
+        margin-bottom: 14px;
+      }
+
+      .menu-column a {
+        color: #444;
+        font-size: 0.95rem;
+        text-decoration: none;
+        margin-bottom: 10px;
+        transition: color 0.25s;
+      }
+
+      .menu-column a:hover {
+        color: #f9c235;
+      }
+
+      #container {
+        height: 100vh;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        padding-top: 70px;
+      }
+
+      section {
+        height: 100vh;
+        width: 100vw;
+        scroll-snap-align: start;
         display: flex;
         justify-content: center;
-        gap: 5rem; /* 이미지 사이 간격 늘림 */
-        margin-bottom: 1.5rem;
+        align-items: center;
+        font-size: 2rem;
+        transition: background 0.3s;
       }
 
-      .company-image {
-        width: 40%;
-        max-width: 500px;
-        border-radius: 10px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        object-fit: cover;
-        opacity: 0;
-        transform: translateY(50px);
-        transition:
-          opacity 0.8s ease,
-          transform 0.8s ease;
+      .section1 {
+        background: #eff2f5;
+        color: #222;
       }
-
-      /* 애니메이션 활성화 클래스 */
-      .company-image.show {
-        opacity: 1;
-        transform: translateY(-40px);
+      .section2 {
+        background: #007acc;
+        color: white;
       }
-      .image-container {
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
+      .section3 {
+        background: #eff2f5;
+        color: white;
       }
-
-      .overlay-text {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.6);
-        color: #fff;
-        font-weight: bold;
-        text-align: center;
-        padding: 0.8rem;
-        font-size: 1rem;
-        opacity: 0;
-        transform: translateY(100%);
-        transition: all 0.3s ease;
+      .section4 {
+        background: #f2f2f2;
+        color: #222;
       }
-
-      .image-container:hover .overlay-text {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .image-link {
-        display: block;
-        width: 40%;
-        max-width: 500px;
-        cursor: pointer;
-        text-decoration: none;
-      }
-
-      .image-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        overflow: hidden;
-      }
-
-      .company-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        opacity: 0;
-        transform: translateY(50px);
-        transition:
-          opacity 0.8s ease,
-          transform 0.8s ease;
+      .section5 {
+        background: #003a70;
+        color: white;
       }
     </style>
   </head>
   <body>
-    <!-- Header -->
-    <header class="header">
+    <header id="mainHeader" class="dark">
       <div class="logo">함손 건설기계</div>
-      <nav class="nav">
-        <ul>
-          <li><a href="#">회사소개</a></li>
-          <li><a href="#">제품소개</a></li>
-          <li><a href="#">고객지원</a></li>
-          <li><a href="#">공지사항</a></li>
-        </ul>
+      <nav class="center-nav">
+        <div class="menu-item">
+          <a href="#section1" class="menu-link">회사소개</a>
+          <div class="mega-menu">
+            <div class="menu-column">
+              <h4>기업 정보</h4>
+              <a href="#">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+            </div>
+            <div class="menu-column">
+              <h4>연혁</h4>
+              <a href="#">1</a>
+              <a href="#">2</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <a href="#section2" class="menu-link">사업소개</a>
+          <div class="mega-menu">
+            <div class="menu-column">
+              <h4>건설 장비</h4>
+              <a href="#">굴착기</a>
+              <a href="#">지게차</a>
+              <a href="#">휠로더</a>
+            </div>
+            <div class="menu-column">
+              <h4>서비스</h4>
+              <a href="#">1</a>
+              <a href="#">2</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <a href="#section4" class="menu-link">사회공헌</a>
+          <div class="mega-menu">
+            <div class="menu-column">
+              <h4>1</h4>
+              <a href="#">1</a>
+              <a href="#">2</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <a href="#section5" class="menu-link">문의</a>
+        </div>
       </nav>
     </header>
 
-    <!-- Main Visual -->
-    <section class="main-visual">
-      <img src="images/main-visual.jpg" alt="메인 배너 이미지" />
-      <div class="text-overlay">
-        <h1>Global Leader in Smart Construction</h1>
-        <p>대충 내용 어쩌고 저쩌고</p>
-      </div>
-    </section>
+    <div id="container">
+      <section class="section1" id="section1">함손 건설기계</section>
+      <section class="section2" id="section2">연혁 및 비전</section>
+      <section class="section3" id="section3">1% 나눔 이야기</section>
+      <section class="section4" id="section4">고객센터 & 푸터</section>
+      <section class="section5" id="section5">문의하기</section>
+    </div>
 
-    <!-- Company Overview -->
-    <section class="company-info">
-      <h2>회사 소개</h2>
-      <div class="company-content">
-        <div class="image-wrapper">
-          <a href="https://example.com/left" target="_blank" class="image-link">
-            <div class="image-container">
-              <img
-                src="/images/a.jpg"
-                alt="왼쪽"
-                class="company-image fade-up"
-              />
-              <div class="overlay-text">홈페이지 가기</div>
-            </div>
-          </a>
-          <a
-            href="https://example.com/right"
-            target="_blank"
-            class="image-link"
-          >
-            <div class="image-container">
-              <img
-                src="/images/b.jpg"
-                alt="오른쪽"
-                class="company-image fade-up"
-              />
-              <div class="overlay-text">홈페이지 가기</div>
-            </div>
-          </a>
-        </div>
+    <script>
+      const header = document.getElementById('mainHeader');
+      const sections = document.querySelectorAll('section');
+      const menuItems = document.querySelectorAll('.menu-item');
+      let activeMega = null;
+      let hideTimer = null;
 
-        <p>대충 내용 어쩌고 저쩌고</p>
-      </div>
-    </section>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const isLight = entry.target.classList.contains('section2');
+              header.classList.toggle('light', isLight);
+              header.classList.toggle('dark', !isLight);
+            }
+          });
+        },
+        {
+          root: document.querySelector('#container'),
+          threshold: 0.6,
+        },
+      );
 
-    <!-- Products Section -->
-    <section class="products">
-      <h2>주요 제품</h2>
-      <div class="product-list">
-        <div class="product-item">
-          <img src="images/excavator.jpg" alt="스키드로더" />
-          <p>스키드로더</p>
-        </div>
-        <div class="product-item">
-          <img src="images/wheel-loader.jpg" alt="로더" />
-          <p>로더</p>
-        </div>
-        <div class="product-item">
-          <img src="images/mini-excavator.jpg" alt="소형굴삭기" />
-          <p>소형굴삭기</p>
-        </div>
-      </div>
-    </section>
+      sections.forEach((section) => observer.observe(section));
 
-    <!-- News Section -->
-    <section class="news">
-      <h2>뉴스 & 공지사항</h2>
-      <ul>
-        <li><a href="#">[공지] 대충 내용 어쩌고 저쩌고</a></li>
-      </ul>
-    </section>
+      menuItems.forEach((menuItem) => {
+        const megaMenu = menuItem.querySelector('.mega-menu');
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p>&copy; 함손 건설기계 All rights reserved.</p>
-    </footer>
-  </body>
-  <script>
-    // 로딩 시 fade-up 효과 적용
-    window.addEventListener('DOMContentLoaded', () => {
-      const images = document.querySelectorAll('.company-image');
+        const showMega = () => {
+          if (activeMega && activeMega !== megaMenu) {
+            hideMega(activeMega);
+          }
+          clearTimeout(hideTimer);
+          if (megaMenu) {
+            megaMenu.style.opacity = '1';
+            megaMenu.style.visibility = 'visible';
+            megaMenu.style.pointerEvents = 'auto';
+            megaMenu.style.transform = 'translateX(-50%) translateY(0)';
+            activeMega = megaMenu;
+          }
+        };
 
-      images.forEach((img, index) => {
-        setTimeout(() => {
-          img.classList.add('show');
-        }, index * 300); // 이미지 순차적으로 애니메이션
+        const hideMega = (targetMenu) => {
+          if (targetMenu) {
+            targetMenu.style.opacity = '0';
+            targetMenu.style.visibility = 'hidden';
+            targetMenu.style.pointerEvents = 'none';
+            targetMenu.style.transform = 'translateX(-50%) translateY(10px)';
+            if (activeMega === targetMenu) activeMega = null;
+          }
+        };
+
+        menuItem.addEventListener('mouseenter', () => {
+          showMega();
+        });
+
+        menuItem.addEventListener('mouseleave', () => {
+          hideTimer = setTimeout(() => {
+            if (megaMenu) hideMega(megaMenu);
+          }, 200);
+        });
+
+        if (megaMenu) {
+          megaMenu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimer);
+          });
+
+          megaMenu.addEventListener('mouseleave', () => {
+            hideTimer = setTimeout(() => {
+              hideMega(megaMenu);
+            }, 200);
+          });
+        }
       });
-    });
-  </script>
+    </script>
+  </body>
 </html>
