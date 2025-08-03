@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -27,23 +27,25 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        background-color: white;
-        color: #003a70;
+        background-color: transparent; /* ← 여기 변경 */
+        color: white; /* 기본 글자색은 흰색으로 */
         transition:
           background-color 0.4s,
           color 0.4s,
           box-shadow 0.3s;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        box-shadow: none; /* 처음에는 그림자도 제거 */
       }
 
       header.dark {
-        background-color: white;
-        color: black;
+        background-color: transparent;
+        color: white;
+        box-shadow: none;
       }
 
       header.light {
-        background-color: #007acc;
-        color: white;
+        background-color: #ffffff;
+        color: #003a70;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       }
 
       .logo {
@@ -166,16 +168,207 @@
       }
 
       .section1 {
-        background: #eff2f5;
-        color: #222;
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        color: white;
+        background: black;
       }
+
+      .background-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        object-fit: cover;
+      }
+
       .section2 {
-        background: #007acc;
-        color: white;
+        background: black; /* 또는 다른 어두운 색으로 확실하게 지정 */
       }
-      .section3 {
-        background: #eff2f5;
+      .grid-6x2-merged {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        gap: 0; /* 간격 제거 */
+      }
+
+      .grid-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        background-color: transparent;
         color: white;
+        font-size: 1.3rem;
+        font-weight: 600;
+        border: none; /* 구분선 제거 */
+        box-sizing: border-box;
+        transition:
+          background-color 0.3s,
+          transform 0.3s;
+        cursor: pointer;
+      }
+
+      .grid-item:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+      }
+
+      /* 1번+2번 합쳐진 셀 설정 */
+      .item1 {
+        grid-column: 1 / span 2; /* 1~2번 열 합침 */
+        grid-row: 1 / 2;
+      }
+
+      /* 나머지는 자동 배치됨 */
+      .item3 {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+      }
+      .item4 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+      .item5 {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+      }
+      .item6 {
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+      }
+
+      .content-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+      }
+
+      .content-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* 잘리지 않게 */
+        transition: transform 0.3s ease;
+        display: block;
+        padding: 20px; /* 필요시 조절 */
+      }
+
+      .grid-item {
+        /* 기존에 height 고정값이 있다면 제거 */
+        overflow: hidden;
+      }
+
+      .content-box {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background: transparent;
+      }
+
+      .content-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        display: block;
+        padding: 0;
+      }
+
+      .grid-item:hover img {
+        transform: scale(1.05);
+      }
+
+      /* 텍스트 오버레이로 중앙 정렬 */
+      .content-box span {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: white;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .content-box video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border: none;
+      }
+
+      .section3::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4); /* 어두운 반투명 오버레이 */
+        z-index: 0;
+      }
+
+      .section3 {
+        position: relative;
+        z-index: 1;
+        background-image: url('../public/images/basic.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+      }
+
+      .card-container {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        width: 100%;
+        z-index: 2;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 16px;
+        width: 180px;
+        height: 220px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
       .section4 {
         background: #f2f2f2;
@@ -243,9 +436,67 @@
     </header>
 
     <div id="container">
-      <section class="section1" id="section1">함손 건설기계</section>
-      <section class="section2" id="section2">연혁 및 비전</section>
-      <section class="section3" id="section3">1% 나눔 이야기</section>
+      <section class="section1" id="section1">
+        <video autoplay muted loop playsinline class="background-video">
+          <source src="../public/video/main.mp4" type="video/mp4" />
+        </video>
+      </section>
+      <section class="section2" id="section2">
+        <div class="grid-6x2-merged">
+          <div class="grid-item item1">
+            <div class="content-box">
+              <img src="../public/images/roder.jpg" alt="사업1+2 이미지" />
+              <span>건설 솔루션</span>
+            </div>
+          </div>
+          <div class="grid-item item3">
+            <div class="content-box">
+              <img src="../public/images/roder.jpg" alt="사업3 이미지" />
+              <span>장비 임대</span>
+            </div>
+          </div>
+          <div class="grid-item item4">
+            <div class="content-box">
+              <img src="../public/images/what.png" alt="사업4 이미지" />
+              <span>정비 서비스</span>
+            </div>
+          </div>
+          <div class="grid-item item5">
+            <div class="content-box">
+              <video
+                src="../public/video/factory.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+              ></video>
+              <span>부품 공급</span>
+            </div>
+          </div>
+
+          <div class="grid-item item6">
+            <div class="content-box">
+              <video
+                src="../public/video/factory.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+              ></video>
+              <span>해외 수출</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section3" id="section3">
+        <div class="card-container">
+          <div class="card">블록 1</div>
+          <div class="card">블록 2</div>
+          <div class="card">블록 3</div>
+          <div class="card">블록 4</div>
+          <div class="card">블록 5</div>
+        </div>
+      </section>
       <section class="section4" id="section4">고객센터 & 푸터</section>
       <section class="section5" id="section5">문의하기</section>
     </div>
@@ -261,7 +512,7 @@
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              const isLight = entry.target.classList.contains('section2');
+              const isLight = entry.target.classList.contains('section4');
               header.classList.toggle('light', isLight);
               header.classList.toggle('dark', !isLight);
             }
