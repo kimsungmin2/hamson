@@ -2,6 +2,11 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
     <title>함손</title>
     <style>
       * {
@@ -15,6 +20,9 @@
         height: 100%;
         overflow: hidden;
         font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
       }
 
       header {
@@ -133,6 +141,8 @@
       /* 햄버거 메뉴 기본 숨김 (PC에서) */
       .hamburger-menu {
         display: none;
+        position: relative;
+        z-index: 10001;
       }
 
       /* 사이드바 기본 숨김 (PC에서) */
@@ -365,6 +375,8 @@
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE and Edge */
         will-change: scroll-position; /* 스크롤 성능 최적화 */
+        -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
+        overscroll-behavior: none; /* 스크롤 바운스 방지 */
       }
 
       #container::-webkit-scrollbar {
@@ -1047,10 +1059,6 @@
         
         .hamburger-menu {
           display: flex !important;
-        }
-
-        .hamburger-menu {
-          display: flex;
           flex-direction: column;
           justify-content: space-around;
           width: 30px;
@@ -1060,6 +1068,10 @@
           cursor: pointer;
           padding: 0;
           z-index: 10001;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .hamburger-menu span {
@@ -1068,6 +1080,8 @@
           background: white;
           border-radius: 2px;
           transition: all 0.3s ease;
+          -webkit-tap-highlight-color: transparent;
+          pointer-events: none;
         }
 
         .hamburger-menu.active span:nth-child(1) {
@@ -1080,6 +1094,10 @@
 
         .hamburger-menu.active span:nth-child(3) {
           transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .hamburger-menu.active {
+          -webkit-tap-highlight-color: transparent;
         }
 
         .sidebar {
@@ -1096,10 +1114,15 @@
           box-sizing: border-box;
           display: block !important;
           pointer-events: auto !important;
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+          will-change: transform;
         }
 
         .sidebar.active {
           right: 0;
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
         }
 
                 .sidebar-nav {
@@ -1133,12 +1156,22 @@
           word-break: keep-all !important;
           word-wrap: normal !important;
           line-height: 1.2 !important;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .sidebar-menu-link:hover {
           color: #f9c235;
           transform: translateX(10px);
           background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-menu-link:active {
+          color: #f39c12;
+          transform: translateX(5px);
+          background: rgba(255, 255, 255, 0.1);
         }
 
         .sidebar-overlay {
@@ -1154,16 +1187,25 @@
           transition: all 0.3s ease;
           display: block !important;
           pointer-events: auto !important;
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+          will-change: opacity, visibility;
         }
 
         .sidebar-overlay.active {
           opacity: 1;
           visibility: visible;
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
         }
 
         .action-button {
           padding: 8px 15px;
           font-size: 0.8rem;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .section-title {
@@ -1251,6 +1293,10 @@
           width: 40px;
           height: 40px;
           font-size: 16px;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .background-video {
@@ -1411,6 +1457,10 @@
           width: 35px;
           height: 35px;
           font-size: 14px;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .fullscreen-overlay {
@@ -1504,6 +1554,10 @@
         .action-button {
           padding: 5px 10px;
           font-size: 0.6rem;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .section-title {
@@ -1555,6 +1609,10 @@
           width: 30px;
           height: 30px;
           font-size: 12px;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .fullscreen-overlay {
@@ -1575,11 +1633,15 @@
       }
 
       /* 모바일에서 스크롤 인디케이터와 섹션 타이틀 숨기기 */
-      @media (max-width: 480px) {
+      @media (max-width: 768px) {
         .scroll-indicator,
         .section-titles,
         .scroll-hint {
-          display: none;
+          display: none !important;
+        }
+        
+        .hamburger-menu {
+          display: flex !important;
         }
       }
 
@@ -1588,21 +1650,38 @@
         #container {
           -webkit-overflow-scrolling: touch;
           scroll-behavior: smooth;
+          overscroll-behavior: none;
         }
 
         section {
           -webkit-transform: translateZ(0);
           transform: translateZ(0);
+          will-change: transform;
         }
 
         .grid-item {
           -webkit-transform: translateZ(0);
           transform: translateZ(0);
+          will-change: transform;
         }
 
         .card {
           -webkit-transform: translateZ(0);
           transform: translateZ(0);
+          will-change: transform;
+        }
+
+        .sidebar {
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+          will-change: transform;
+        }
+
+        .hamburger-menu {
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
         }
       }
 
@@ -1627,6 +1706,23 @@
         .video-btn {
           min-height: 44px;
           min-width: 44px;
+        }
+
+        .hamburger-menu {
+          min-height: 44px;
+          min-width: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .action-button {
+          min-height: 44px;
+          min-width: 44px;
+        }
+
+        .sidebar-menu-link {
+          min-height: 44px;
         }
       }
 
@@ -1740,6 +1836,16 @@
           width: 35px;
           height: 35px;
           font-size: 14px;
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+
+        .scroll-indicator,
+        .section-titles,
+        .scroll-hint {
+          display: none;
         }
       }
 
@@ -1753,6 +1859,28 @@
 
         .scroll-behavior {
           scroll-behavior: auto;
+        }
+      }
+
+      /* 모바일 성능 최적화 */
+      @media (max-width: 768px) {
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        img, video {
+          -webkit-user-drag: none;
+          -khtml-user-drag: none;
+          -moz-user-drag: none;
+          -o-user-drag: none;
+          user-drag: none;
+        }
+
+        input, textarea, button, select {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
         }
       }
 
@@ -2196,13 +2324,23 @@
 
         // 모바일에서 스크롤 인디케이터와 섹션 타이틀 숨기기
         if (isMobile()) {
-          scrollIndicator.style.display = 'none';
-          document.getElementById('sectionTitles').style.display = 'none';
-          scrollHint.style.display = 'none';
+          if (scrollIndicator) scrollIndicator.style.display = 'none';
+          if (document.getElementById('sectionTitles')) {
+            document.getElementById('sectionTitles').style.display = 'none';
+          }
+          if (scrollHint) scrollHint.style.display = 'none';
+          
+          // 모바일에서 햄버거 메뉴 표시
+          if (hamburgerMenu) hamburgerMenu.style.display = 'flex';
         } else {
-          scrollIndicator.style.display = 'flex';
-          document.getElementById('sectionTitles').style.display = 'flex';
-          scrollHint.style.display = 'block';
+          if (scrollIndicator) scrollIndicator.style.display = 'flex';
+          if (document.getElementById('sectionTitles')) {
+            document.getElementById('sectionTitles').style.display = 'flex';
+          }
+          if (scrollHint) scrollHint.style.display = 'block';
+          
+          // 데스크톱에서 햄버거 메뉴 숨기기
+          if (hamburgerMenu) hamburgerMenu.style.display = 'none';
         }
 
         // 이벤트 리스너 재설정
@@ -2269,9 +2407,18 @@
 
       // 초기 로드 시 모바일 체크
       if (isMobile()) {
-        scrollIndicator.style.display = 'none';
-        document.getElementById('sectionTitles').style.display = 'none';
-        scrollHint.style.display = 'none';
+        if (scrollIndicator) scrollIndicator.style.display = 'none';
+        if (document.getElementById('sectionTitles')) {
+          document.getElementById('sectionTitles').style.display = 'none';
+        }
+        if (scrollHint) scrollHint.style.display = 'none';
+        
+        // 모바일에서 햄버거 메뉴 표시
+        if (hamburgerMenu) hamburgerMenu.style.display = 'flex';
+        
+        console.log('모바일 모드로 초기화됨');
+      } else {
+        console.log('데스크톱 모드로 초기화됨');
       }
 
       // 비디오 컨트롤 기능
@@ -2428,6 +2575,38 @@
       container.addEventListener('scroll', () => {
         scrollHint.style.opacity = '0';
       });
+
+      // 모바일 터치 이벤트 최적화
+      if (isMobile()) {
+        // 더블 탭 줌 방지
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+          const now = (new Date()).getTime();
+          if (now - lastTouchEnd <= 300) {
+            e.preventDefault();
+          }
+          lastTouchEnd = now;
+        }, false);
+
+        // 스크롤 성능 최적화
+        container.addEventListener('touchstart', () => {
+          container.style.overflow = 'hidden';
+        }, { passive: true });
+
+        container.addEventListener('touchend', () => {
+          container.style.overflow = 'scroll';
+        }, { passive: true });
+
+        // 모바일에서 스크롤 인디케이터와 섹션 타이틀 숨기기
+        if (scrollIndicator) scrollIndicator.style.display = 'none';
+        if (document.getElementById('sectionTitles')) {
+          document.getElementById('sectionTitles').style.display = 'none';
+        }
+        if (scrollHint) scrollHint.style.display = 'none';
+
+        // 모바일에서 햄버거 메뉴 표시
+        if (hamburgerMenu) hamburgerMenu.style.display = 'flex';
+      }
 
       // 초기 인디케이터 상태 설정
       updateScrollIndicator();
