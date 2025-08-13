@@ -137,13 +137,13 @@
 
       /* 사이드바 기본 숨김 (PC에서) */
       .sidebar {
-        display: none !important;
-        pointer-events: none !important;
+        display: none;
+        pointer-events: none;
       }
 
       .sidebar-overlay {
-        display: none !important;
-        pointer-events: none !important;
+        display: none;
+        pointer-events: none;
       }
 
       nav.center-nav {
@@ -1094,8 +1094,8 @@
           transition: right 0.3s ease;
           padding: 80px 30px 30px;
           box-sizing: border-box;
-          display: block;
-          pointer-events: auto;
+          display: block !important;
+          pointer-events: auto !important;
         }
 
         .sidebar.active {
@@ -1152,8 +1152,8 @@
           opacity: 0;
           visibility: hidden;
           transition: all 0.3s ease;
-          display: block;
-          pointer-events: auto;
+          display: block !important;
+          pointer-events: auto !important;
         }
 
         .sidebar-overlay.active {
@@ -1285,6 +1285,8 @@
           width: 280px;
           right: -280px;
           padding: 70px 20px 20px;
+          display: block !important;
+          pointer-events: auto !important;
         }
         
         .sidebar-menu-link {
@@ -1459,6 +1461,8 @@
           width: 260px;
           right: -260px;
           padding: 60px 15px 15px;
+          display: block !important;
+          pointer-events: auto !important;
         }
         
         .sidebar-menu-link {
@@ -2210,12 +2214,22 @@
 
       // 모바일 햄버거 메뉴 기능
       if (hamburgerMenu && sidebar && sidebarOverlay) {
+        console.log('햄버거 메뉴 요소들 찾음:', { hamburgerMenu, sidebar, sidebarOverlay });
+        
         hamburgerMenu.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
+          console.log('햄버거 메뉴 클릭됨');
+          
           hamburgerMenu.classList.toggle('active');
           sidebar.classList.toggle('active');
           sidebarOverlay.classList.toggle('active');
+          
+          console.log('클래스 토글 후 상태:', {
+            hamburgerActive: hamburgerMenu.classList.contains('active'),
+            sidebarActive: sidebar.classList.contains('active'),
+            overlayActive: sidebarOverlay.classList.contains('active')
+          });
         });
 
         sidebarOverlay.addEventListener('click', (e) => {
