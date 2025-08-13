@@ -2,10 +2,16 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="format-detection" content="telephone=no" />
     <title>함손</title>
     <style>
@@ -1001,15 +1007,15 @@
       }
 
       /* 반응형 스타일 */
-            @media (max-width: 1200px) {
+      @media (max-width: 1200px) {
         header {
           padding: 0 40px;
         }
-        
+
         .center-nav {
           gap: 40px;
         }
-        
+
         .menu-link {
           font-size: 1.1rem;
           padding: 12px 20px;
@@ -1035,28 +1041,28 @@
         }
       }
 
-            @media (max-width: 768px) {
+      @media (max-width: 768px) {
         header {
           padding: 0 20px;
           height: 60px;
           background: rgba(0, 0, 0, 0.8);
           backdrop-filter: blur(10px);
         }
-        
+
         .logo {
           font-size: 1.3rem;
           gap: 10px;
         }
-        
+
         .logo-img {
           width: 35px;
           height: 35px;
         }
-        
+
         .center-nav {
           display: none !important;
         }
-        
+
         .hamburger-menu {
           display: flex !important;
           flex-direction: column;
@@ -1125,21 +1131,21 @@
           transform: translateZ(0);
         }
 
-                .sidebar-nav {
+        .sidebar-nav {
           display: flex;
           flex-direction: column;
           gap: 0;
         }
-        
+
         .sidebar-menu-item {
           padding: 0;
           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .sidebar-menu-item:last-child {
           border-bottom: none;
         }
-        
+
         .sidebar-menu-link {
           color: white;
           font-size: 1.1rem;
@@ -1318,15 +1324,15 @@
           background: rgba(0, 0, 0, 0.9);
           backdrop-filter: blur(15px);
         }
-        
+
         .center-nav {
           display: none !important;
         }
-        
+
         .hamburger-menu {
           display: flex !important;
         }
-        
+
         .sidebar {
           width: 280px;
           right: -280px;
@@ -1334,7 +1340,7 @@
           display: block !important;
           pointer-events: auto !important;
         }
-        
+
         .sidebar-menu-link {
           font-size: 1rem;
           padding: 18px 0;
@@ -1498,15 +1504,15 @@
           background: rgba(0, 0, 0, 0.95);
           backdrop-filter: blur(20px);
         }
-        
+
         .center-nav {
           display: none !important;
         }
-        
+
         .hamburger-menu {
           display: flex !important;
         }
-        
+
         .sidebar {
           width: 260px;
           right: -260px;
@@ -1514,7 +1520,7 @@
           display: block !important;
           pointer-events: auto !important;
         }
-        
+
         .sidebar-menu-link {
           font-size: 0.9rem;
           padding: 16px 0;
@@ -1639,7 +1645,7 @@
         .scroll-hint {
           display: none !important;
         }
-        
+
         .hamburger-menu {
           display: flex !important;
         }
@@ -1869,15 +1875,18 @@
           -moz-osx-font-smoothing: grayscale;
         }
 
-        img, video {
+        img,
+        video {
           -webkit-user-drag: none;
           -khtml-user-drag: none;
           -moz-user-drag: none;
           -o-user-drag: none;
-          user-drag: none;
         }
 
-        input, textarea, button, select {
+        input,
+        textarea,
+        button,
+        select {
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
@@ -2329,7 +2338,7 @@
             document.getElementById('sectionTitles').style.display = 'none';
           }
           if (scrollHint) scrollHint.style.display = 'none';
-          
+
           // 모바일에서 햄버거 메뉴 표시
           if (hamburgerMenu) hamburgerMenu.style.display = 'flex';
         } else {
@@ -2338,7 +2347,7 @@
             document.getElementById('sectionTitles').style.display = 'flex';
           }
           if (scrollHint) scrollHint.style.display = 'block';
-          
+
           // 데스크톱에서 햄버거 메뉴 숨기기
           if (hamburgerMenu) hamburgerMenu.style.display = 'none';
         }
@@ -2352,21 +2361,25 @@
 
       // 모바일 햄버거 메뉴 기능
       if (hamburgerMenu && sidebar && sidebarOverlay) {
-        console.log('햄버거 메뉴 요소들 찾음:', { hamburgerMenu, sidebar, sidebarOverlay });
-        
+        console.log('햄버거 메뉴 요소들 찾음:', {
+          hamburgerMenu,
+          sidebar,
+          sidebarOverlay,
+        });
+
         hamburgerMenu.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
           console.log('햄버거 메뉴 클릭됨');
-          
+
           hamburgerMenu.classList.toggle('active');
           sidebar.classList.toggle('active');
           sidebarOverlay.classList.toggle('active');
-          
+
           console.log('클래스 토글 후 상태:', {
             hamburgerActive: hamburgerMenu.classList.contains('active'),
             sidebarActive: sidebar.classList.contains('active'),
-            overlayActive: sidebarOverlay.classList.contains('active')
+            overlayActive: sidebarOverlay.classList.contains('active'),
           });
         });
 
@@ -2412,10 +2425,10 @@
           document.getElementById('sectionTitles').style.display = 'none';
         }
         if (scrollHint) scrollHint.style.display = 'none';
-        
+
         // 모바일에서 햄버거 메뉴 표시
         if (hamburgerMenu) hamburgerMenu.style.display = 'flex';
-        
+
         console.log('모바일 모드로 초기화됨');
       } else {
         console.log('데스크톱 모드로 초기화됨');
@@ -2580,22 +2593,34 @@
       if (isMobile()) {
         // 더블 탭 줌 방지
         let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-          const now = (new Date()).getTime();
-          if (now - lastTouchEnd <= 300) {
-            e.preventDefault();
-          }
-          lastTouchEnd = now;
-        }, false);
+        document.addEventListener(
+          'touchend',
+          (e) => {
+            const now = new Date().getTime();
+            if (now - lastTouchEnd <= 300) {
+              e.preventDefault();
+            }
+            lastTouchEnd = now;
+          },
+          false,
+        );
 
         // 스크롤 성능 최적화
-        container.addEventListener('touchstart', () => {
-          container.style.overflow = 'hidden';
-        }, { passive: true });
+        container.addEventListener(
+          'touchstart',
+          () => {
+            container.style.overflow = 'hidden';
+          },
+          { passive: true },
+        );
 
-        container.addEventListener('touchend', () => {
-          container.style.overflow = 'scroll';
-        }, { passive: true });
+        container.addEventListener(
+          'touchend',
+          () => {
+            container.style.overflow = 'scroll';
+          },
+          { passive: true },
+        );
 
         // 모바일에서 스크롤 인디케이터와 섹션 타이틀 숨기기
         if (scrollIndicator) scrollIndicator.style.display = 'none';
