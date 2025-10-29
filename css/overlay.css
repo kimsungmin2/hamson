@@ -1,0 +1,6 @@
+.fullscreen-overlay { position:fixed; top:var(--header-h); left:0; width:100vw; height:40vh; background:rgba(255,255,255,.95); backdrop-filter:blur(20px); z-index:9999; opacity:0; visibility:hidden; pointer-events:none; transition:all .3s ease; box-shadow:0 4px 20px rgba(0,0,0,.08); }
+.fullscreen-overlay.active { opacity:1; visibility:visible; pointer-events:auto; }
+.overlay-content { display:grid; grid-auto-flow:column; grid-auto-columns:200px; gap:24px; justify-content:center; align-items:start; padding:20px 0; }
+.menu-column { display:flex; flex-direction:column; padding:0 10px; width:200px; }
+.menu-column a { color:#718096; font-size:1rem; font-weight:500; margin-bottom:12px; padding:10px 0; text-align:center; }
+.menu-column a:hover { color:#2d3748; transform:translateX(5px); }

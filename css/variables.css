@@ -1,0 +1,10 @@
+:root {
+  --brand-1: #f9c235;
+  --brand-2: #f39c12;
+  --text: #333;
+  --text-invert: #fff;
+  --bg: #fff;
+  --bg-dark: #000;
+  --header-h: 80px;
+  --shadow-1: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
